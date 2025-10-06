@@ -2,9 +2,11 @@
 FROM nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04
 
 WORKDIR /
+
 ENV DEBIAN_FRONTEND=noninteractive \
+    PIP_NO_CACHE_DIR=1 PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
     VENV_PATH=/opt/venv \
-    HF_HUB_DISABLE_TELEMETRY=1 \
     TZ=Etc/UTC
 
 # runtimes
@@ -22,11 +24,16 @@ RUN python3 -m venv ${VENV_PATH}
 ENV PATH="${VENV_PATH}/bin:${PATH}"
 RUN python -m ensurepip --upgrade || true
 
+# Upgrade python tools
+RUN --mount=type=cache,target=/root/.cache/pip \
+    python -m pip install --upgrade pip setuptools wheel
+
+# Install python development tools
+RUN --mount=type=cache,target=/root/.cache/pip \
+    python -m pip install pytest scikit-build-core ninja build psutil
+
 # Install pytorch
 RUN --mount=type=cache,target=/root/.cache/pip \
-    python -m pip install --upgrade pip setuptools wheel pytest scikit-build-core ninja build psutil
-
-RUN	--mount=type=cache,target=/root/.cache/pip \
     python -m pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129
 
 # Metadata
