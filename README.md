@@ -21,7 +21,7 @@ This image is built on top of Nvidia Ubuntu official Docker images, ensuring com
 | PyTorch   | `2.8.0`              |
 | CUDA      | `12.9.1`             |
 | Triton    | `2.3.x`               |
-| nvcc      | `12.9.x`.            |
+| nvcc      | `12.9.x`            |
 
 ## venv setting for subsequent images
 
@@ -34,7 +34,7 @@ ENV PATH="/opt/venv/bin:${PATH}"
 
 ### Image Pytorch 2.8.0
 
-Base Image: nvidia/cuda:12.9.1-cudnn-develop-ubuntu24.04
+Base Image: nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04
 
 Custom Build: 
 
