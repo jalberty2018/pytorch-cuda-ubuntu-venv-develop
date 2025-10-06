@@ -24,7 +24,8 @@ RUN python -m ensurepip --upgrade || true
 
 # Install pytorch
 RUN --mount=type=cache,target=/root/.cache/pip \
-    python -m pip install --upgrade pip setuptools wheel
+    python -m pip install --upgrade pip setuptools wheel pytest scikit-build-core ninja build psutil
+
 RUN	--mount=type=cache,target=/root/.cache/pip \
     python -m pip install torch==2.8.0+cu129 torchvision==0.23.0+cu129 torchaudio==2.8.0+cu129 --index-url https://download.pytorch.org/whl/cu129
 
