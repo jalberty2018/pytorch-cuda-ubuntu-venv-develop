@@ -35,11 +35,7 @@ LABEL org.opencontainers.image.title="Develop CUDA24 + PyTorch cu129 Base" \
       org.opencontainers.image.description="Base image: CUDA 12.9 devel + Ubuntu 24.04 + Python venv + PyTorch cu129 + triton" \
       org.opencontainers.image.source="https://hub.docker.com/r/ls250824/pytorch-cuda-ubuntu-venv-develop" \
       org.opencontainers.image.licenses="MIT"
-      
-# TEST
-RUN python - <<'PY'
-import torch, torchvision, torchaudio, sys
-print(f"Torch: {torch.__version__}")
-print(f"Torchvision: {torchvision.__version__}")
-print(f"Torchaudio: {torchaudio.__version__}")
-PY 
+
+# Test
+RUN python -c "import torch, torchvision, torchaudio; \
+print(f'Torch: {torch.__version__}\\nTorchvision: {torchvision.__version__}\\nTorchaudio: {torchaudio.__version__}\\nCUDA available: {torch.cuda.is_available()}\\nCUDA version: {torch.version.cuda}')"
