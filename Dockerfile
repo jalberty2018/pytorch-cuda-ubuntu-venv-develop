@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates curl wget git git-lfs ffmpeg \
       libgl1 libglib2.0-0 libsm6 libxext6 libxrender1 libglx-mesa0 \
       build-essential make cmake apt-utils ninja-build pkg-config libcairo2-dev \
+	  zip zlib1g zlib1g-dev gnupg rsync socat libpango1.0-dev libjpeg-dev libpng-dev \
+	  libffi-dev libsm6 libxext6 libxrender1 \
       jq unzip p7zip-full ncdu lsof nvtop pciutils lshw htop mc nano vim tmux \
       openssh-server openssh-client && \
     rm -rf /var/lib/apt/lists/*
